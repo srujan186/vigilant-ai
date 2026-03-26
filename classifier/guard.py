@@ -163,6 +163,19 @@ class SmartGuard:
         import unicodedata
         text = unicodedata.normalize('NFKD', text)
 
+        # ── Pre-processing (Defeat Multi-lingual Bypasses) ──
+        # Automatically translate non-English prompts to English
+        try:
+            from langdetect import detect
+            from deep_translator import GoogleTranslator
+            # Require at least 3 chars for reliable detection
+            if len(text.strip()) > 2:
+                lang = detect(text)
+                if lang and lang != 'en':
+                    text = GoogleTranslator(source='auto', target='en').translate(text)
+        except Exception:
+            pass  # Fallback gracefully to original text if connection fails
+
         # ── Pre-processing (Defeat Word-Splitting Attacks) ──
         # e.g. "exp losiv es" -> "explosives" for pattern matching
         # We run category detection on a de-spaced version too
