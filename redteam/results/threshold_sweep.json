@@ -1,0 +1,47 @@
+[
+  {
+    "threshold": 0.1,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.2,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.3,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.4,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.5,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.6,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.7,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.8,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  },
+  {
+    "threshold": 0.9,
+    "recall_pct": 60.0,
+    "false_positive_rate_pct": 0.0
+  }
+]

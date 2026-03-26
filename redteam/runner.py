@@ -9,8 +9,8 @@ import os
 import time
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).parent))
-from guard import SmartGuard
+sys.path.append(str(Path(__file__).parent.parent))
+from classifier.guard import SmartGuard
 
 SUITE_PATH = Path(__file__).parent / "test_suite.json"
 RESULTS_PATH = Path(__file__).parent / "results" / "redteam_results.json"
@@ -179,3 +179,4 @@ def sweep_thresholds():
 
 if __name__ == "__main__":
     run_redteam(threshold=0.5)
+    sweep_thresholds()
