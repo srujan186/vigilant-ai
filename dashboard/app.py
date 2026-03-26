@@ -299,7 +299,7 @@ with tab1:
 with tab2:
     st.header("Red-Team Evaluation Results")
 
-    results_path = Path(__file__).parent.parent / "results" / "redteam_results.json"
+    results_path = Path(__file__).parent.parent / "redteam" / "results" / "redteam_results.json"
 
     if not results_path.exists():
         st.warning("⚠️ No results found. Run `python redteam/runner.py` first.")
@@ -372,7 +372,7 @@ with tab3:
     st.header("Accuracy vs Strictness Curve")
     st.caption("How does recall and false positive rate shift as threshold changes from 0.1 → 0.9?")
 
-    sweep_path = Path(__file__).parent.parent / "results" / "threshold_sweep.json"
+    sweep_path = Path(__file__).parent.parent / "redteam" / "results" / "threshold_sweep.json"
 
     if not sweep_path.exists():
         st.warning("⚠️ No sweep data found. Run `python redteam/runner.py` and call `sweep_thresholds()` first.")
