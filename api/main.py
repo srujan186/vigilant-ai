@@ -22,7 +22,7 @@ from classifier.output_guard import OutputGuard
 # ── Groq client ───────────────────────────────────────────────
 from groq import Groq
 
-app = FastAPI(title="SmartGuard API", version="1.0.0")
+app = FastAPI(title="Vigilant AI API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,7 +46,7 @@ async def startup():
     guard = SmartGuard(threshold=float(os.getenv("GUARD_THRESHOLD", "0.5")))
     output_guard = OutputGuard(strict_mode=False)
     groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-    print("✅ SmartGuard API ready (inut+output guard   )")
+    print("✅ Vigilant AI API ready (inut+output guard   )")
 
 
 # ── Request / Response models ─────────────────────────────────

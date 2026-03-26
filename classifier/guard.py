@@ -145,7 +145,7 @@ class SmartGuard:
         self.threshold = threshold
         self.use_llm_judge = use_llm_judge
         self.groq_client = None
-        print("⏳ Loading SmartGuard classifier (first load may take ~30s)...")
+        print("⏳ Loading Vigilant AI classifier (first load may take ~30s)...")
         self.classifier = pipeline(
             "text-classification",
             model="unitary/toxic-bert",
@@ -153,7 +153,7 @@ class SmartGuard:
             truncation=True,
             max_length=512,
         )
-        print("✅ SmartGuard ready.")
+        print("✅ Vigilant AI ready.")
 
     def classify(self, text: str) -> GuardResult:
         """

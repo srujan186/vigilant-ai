@@ -18,7 +18,7 @@ from classifier.guard import SmartGuard
 
 # ── Page config ───────────────────────────────────────────────
 st.set_page_config(
-    page_title="SmartGuard",
+    page_title="Vigilant AI",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -84,7 +84,7 @@ def call_chat_api(prompt: str, threshold: float, system_prompt: str = "You are a
         r.raise_for_status()
         return r.json()
     except requests.exceptions.ConnectionError:
-        st.error("⚠️ Cannot reach SmartGuard API at `http://localhost:8000`. Is `uvicorn api.main:app --reload --port 8000` running?")
+        st.error("⚠️ Cannot reach Vigilant AI API at `http://localhost:8000`. Is `uvicorn api.main:app --reload --port 8000` running?")
         return None
     except Exception as e:
         st.error(f"API error: {e}")
@@ -94,7 +94,7 @@ def call_chat_api(prompt: str, threshold: float, system_prompt: str = "You are a
 # ── Sidebar ───────────────────────────────────────────────────
 with st.sidebar:
     st.image("https://img.icons8.com/fluency/96/shield.png", width=60)
-    st.title("SmartGuard 🛡️")
+    st.title("Vigilant AI 🛡️")
     st.markdown("**LLM Input Firewall**")
     st.divider()
 
@@ -124,7 +124,7 @@ tab1, tab2, tab3 = st.tabs(["🔍 Live Classifier", "📊 Red-Team Results", "�
 # ════════════════════════════════════════════════
 with tab1:
     st.header("Live Prompt Classifier")
-    st.caption("Enter a prompt below. SmartGuard runs the full pipeline: Input Guard → LLM → Output Guard.")
+    st.caption("Enter a prompt below. Vigilant AI runs the full pipeline: Input Guard → LLM → Output Guard.")
 
     prompt = st.text_area("Enter prompt:", height=120,
                            placeholder="Type a prompt here and click Analyze...")
