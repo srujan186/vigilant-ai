@@ -1,4 +1,13 @@
-# 🛡️ SmartGuard — LLM Input/Output Firewall
+---
+title: Vigilant AI
+emoji: 🛡️
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+app_port: 7860
+---
+# 🛡️ Vigilant AI — LLM Input/Output Firewall
 
 > **PS1 — LLM Guardrails | Track A (Pre-trained model)**
 > A working guardrail layer that classifies any LLM prompt as safe or harmful, sits in front of a live LLM, and measures exactly where it passes, where it fails, and why.
