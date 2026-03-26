@@ -56,6 +56,9 @@ TOXIC_PATTERNS = [
     r"\b(buy|purchase|sell|trade|get|find)\b.*\b(illegal|weapons?|guns?|firearms?|drugs?|meth|heroin|fentanyl|cocaine|explosives?|bombs?|poison)\b",
     r"\b(suicide|self.harm|self.hurt|end my life)\b",
     r"(hate|kill|attack)\s+(all\s+)?(jews|muslims|blacks|whites|christians|gays|women|men)",
+    r"how (to|do i|can i).*(rob|steal|shoplift|burgle|heist|break into).*(bank|store|house|money|vault|car)",
+    r"\b(rob|steal|shoplift|burgle|heist)\b.*\b(bank|store|house|money|vault)\b",
+    r"\b(best|good|recommend|what are).*\b(drugs|meth|heroin|fentanyl|cocaine)\b",
 ]
 
 CYBER_PATTERNS = [

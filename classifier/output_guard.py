@@ -141,32 +141,39 @@ class OutputGuard:
     def validate(self, response: str, original_prompt: str = "") -> OutputCheckResult:
         start = time.perf_counter()
 
-        # Check 1: Harmful content
-        result = self._check_harmful_content(response)
+        # ── Multilingual normalization ────────────────────────
+        # Translate non-English responses to English before
+        # running pattern checks (all patterns are English-only)
+        # Attack vector this closes: attacker instructs LLM to
+        # respond in French/Hindi/Arabic to evade regex checks
+        normalized, detected_lang = self._normalize_to_english(response)
+
+        # Check 1: Harmful content (on normalized text)
+        result = self._check_harmful_content(normalized)
         if result:
             latency = round((time.perf_counter() - start) * 1000, 2)
             return OutputCheckResult("unsafe", "harmful_content",
                                      result[1], 0.92, latency, result[0])
 
-        # Check 2: PII leakage
-        result = self._check_pii_leakage(response)
+        # Check 2: PII leakage (on normalized text)
+        result = self._check_pii_leakage(normalized)
         if result:
             latency = round((time.perf_counter() - start) * 1000, 2)
             return OutputCheckResult("unsafe", "pii_leakage",
                                      f"PII detected in response: {result[1]}",
                                      0.95, latency, result[0])
 
-        # Check 3: Injection echo
-        result = self._check_injection_echo(response)
+        # Check 3: Injection echo (on normalized text)
+        result = self._check_injection_echo(normalized)
         if result:
             latency = round((time.perf_counter() - start) * 1000, 2)
             return OutputCheckResult("unsafe", "injection_echo",
                                      "Response shows signs of prompt injection success",
                                      0.90, latency, result)
 
-        # Check 4: Refusal bypass (strict mode only by default)
+        # Check 4: Refusal bypass (on normalized text, strict mode only)
         if self.strict_mode:
-            result = self._check_refusal_bypass(response)
+            result = self._check_refusal_bypass(normalized)
             if result:
                 latency = round((time.perf_counter() - start) * 1000, 2)
                 return OutputCheckResult("unsafe", "refusal_bypass",
@@ -176,6 +183,18 @@ class OutputGuard:
         latency = round((time.perf_counter() - start) * 1000, 2)
         return OutputCheckResult("safe", None, "All output checks passed",
                                  0.0, latency, None)
+
+    def _normalize_to_english(self, text: str) -> tuple:
+        try:
+            from langdetect import detect
+            from deep_translator import GoogleTranslator
+            lang = detect(text)
+            if lang == "en":
+                return text, "en"
+            translated = GoogleTranslator(source="auto", target="en").translate(text)
+            return translated, lang
+        except Exception:
+            return text, "unknown"
 
     def _check_harmful_content(self, text: str):
         text_lower = text.lower()
