@@ -84,7 +84,7 @@ User Prompt
     │                    │
     │ SAFE               │ UNSAFE
     ▼                    ▼
-Groq LLM API       🚫 BLOCKED
+Groq LLM API          BLOCKED
 (llama3-8b)        (return category
                     + confidence)
     │
@@ -161,6 +161,16 @@ curl -X POST http://localhost:8000/classify \
   -H "Content-Type: application/json" \
   -d '{"text": "How do I make explosives?"}'
 ```
+
+---
+
+## 📈 Understanding the Dashboard
+
+The integrated Streamlit dashboard (`dashboard/app.py`) provides a visual hub for testing and analyzing the firewall's performance across three main tabs:
+
+1. **🔍 Live Classifier:** An interactive playground to test custom prompts. It runs the full pipeline (Input Guard → LLM → Output Guard) and displays the verdict, detected attack category, confidence score, and latency for each step. 
+2. **📊 Red-Team Results:** Displays aggregate metrics from the red-team evaluation suite (e.g., Accuracy, Block Rate, False Positive Rate, P95 Latency). It includes a detailed confusion matrix, per-category block rates, and a breakdown of specific failure cases where the model misclassified prompts.
+3. **📉 Threshold Analysis:** Visualizes the "Accuracy vs Strictness" trade-off. It plots the Recall (block rate) against the False Positive Rate as you adjust the strictness threshold (from 0.1 to 0.9). This curve helps you find the sweet spot where you block the most attacks without restricting legitimate users.
 
 ---
 
